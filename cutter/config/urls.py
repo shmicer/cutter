@@ -1,11 +1,11 @@
 
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 
-from api import services
+from api.views import GenerateShortUrl, GetFullUrl
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('api.urls')),
-    path('<str:short_url>', services.redirect),
+    path('url/', GenerateShortUrl.as_view()),
+    path('<str:short_url>', GetFullUrl.as_view()),
 ]

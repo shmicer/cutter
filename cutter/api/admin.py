@@ -6,7 +6,7 @@ from .models import Url
 @admin.register(Url)
 class UrlAdmin(admin.ModelAdmin):
     list_display = (
-        'original_url',
+        'url',
         'short_url',
         'created_date',
         'is_active'

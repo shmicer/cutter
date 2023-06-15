@@ -1,4 +1,6 @@
 from django.db import models
+from django.conf import settings
+import random
 
 '''
 1. Приложение должно получать ссылку через POST запрос
@@ -12,7 +14,7 @@ from django.db import models
 
 
 class Url(models.Model):
-    original_url = models.URLField(unique=True)
+    url = models.URLField(unique=True)
     short_url = models.CharField(
         max_length=20,
         unique=True,
@@ -21,6 +23,8 @@ class Url(models.Model):
     )
     created_date = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
+
+
 
 
 

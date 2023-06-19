@@ -20,7 +20,7 @@ class Url(models.Model):
         db_index=True,
         blank=True
     )
-    created_date = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
 
     @property

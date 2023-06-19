@@ -14,7 +14,7 @@ class GenerateShortUrl(APIView):
     def post(self, request):
         serializer = UrlSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        url = serializer.save()
+        url, created = serializer.save()
         return Response({'url': url.full_url})
 
 

@@ -8,8 +8,8 @@ class UrlAdmin(admin.ModelAdmin):
     list_display = (
         'url',
         'short_url',
-        'created_date',
+        'created',
         'is_active'
     )
     search_fields = ('url', 'short_url')
-    ordering = ('-created_date',)
+    ordering = ('-created',)

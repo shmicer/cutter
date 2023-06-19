@@ -11,5 +11,5 @@ class UrlAdmin(admin.ModelAdmin):
         'created_date',
         'is_active'
     )
-    search_fields = ('original_url', 'short_url')
+    search_fields = ('url', 'short_url')
     ordering = ('-created_date',)

@@ -1,13 +1,12 @@
-from django.core.exceptions import ObjectDoesNotExist
-from django.http import HttpResponse
+from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
-from rest_framework import status
 from rest_framework.views import APIView
 from django.shortcuts import redirect
 
+
 from .models import Url
 from .serializers import UrlSerializer
-from .services import get_full_url, generate_short_url
+# from .services import get_full_url
 
 
 class GenerateShortUrl(APIView):
@@ -15,17 +14,15 @@ class GenerateShortUrl(APIView):
     def post(self, request):
         serializer = UrlSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        url, status_code = serializer.create(
-            validated_data=serializer.validated_data
-            )
-        return Response(UrlSerializer(url).data, status=status_code)
+        url = serializer.save()
+        return Response({'url': url.full_url})
 
 
 class GetFullUrl(APIView):
 
     def get(self, request, short_url):
-
-        full_link = get_full_url(short_url)
+        url_object = get_object_or_404(Url, short_url=short_url)
+        full_link = url_object.url
         return redirect(full_link)
 
 

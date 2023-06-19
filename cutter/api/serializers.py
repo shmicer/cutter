@@ -1,6 +1,6 @@
-from rest_framework import serializers, status
+from rest_framework import serializers
 
-from .services import get_full_url, generate_short_url
+from .services import generate_short_url
 from .models import Url
 
 
@@ -8,18 +8,15 @@ class UrlSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Url
-        fields = '__all__'
-        extra_kwargs = {'url': {'validators': []}}
+        fields = ('url',)
+        # extra_kwargs = {'url': {'validators': []}}
 
-    def create(self, validated_data):
-        full_url = validated_data['url']
-        short_url = generate_short_url()
-        url_object, created = Url.objects.get_or_create(url=full_url, short_url=short_url)
-        if created:
-            status_code = status.HTTP_201_CREATED
+    def save(self, **kwargs):
+        if self.instance is None:
+            encoded_url = generate_short_url()
+            return Url.objects.create(url=self.validated_data['url'], short_url=encoded_url)
         else:
-            status_code = status.HTTP_200_OK
-        return url_object, status_code
+            return Url.objects.get(url=self.validated_data['url'])
 
 
 

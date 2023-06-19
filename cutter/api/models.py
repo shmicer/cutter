@@ -1,6 +1,6 @@
 from django.db import models
-from django.conf import settings
-import random
+from django.contrib.sites.shortcuts import get_current_site
+from django.contrib.sites.models import Site
 
 '''
 1. Приложение должно получать ссылку через POST запрос
@@ -9,8 +9,7 @@ import random
 4. Нужно подключить телеграм бота, при запросе к которому он также выдает короткую ссылку
 5. Можно добавить генерабор qr-кодов для перехода по ссылке при наведении камеры
 '''
-
-# Create your models here.
+current_site = Site.objects.get_current()
 
 
 class Url(models.Model):
@@ -24,6 +23,9 @@ class Url(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
 
+    @property
+    def full_url(self):
+        return f"{current_site.domain}/{self.short_url}"
 
 
 

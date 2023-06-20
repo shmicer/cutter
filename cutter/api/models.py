@@ -1,5 +1,6 @@
 from django.db import models
-from django.contrib.sites.shortcuts import get_current_site
+from django.conf import settings
+import random
 from django.contrib.sites.models import Site
 
 '''

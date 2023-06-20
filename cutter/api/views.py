@@ -1,3 +1,4 @@
+from rest_framework import status
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -14,8 +15,12 @@ class GenerateShortUrl(APIView):
     def post(self, request):
         serializer = UrlSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        url, created = serializer.save()
-        return Response({'url': url.full_url})
+        url, status_code = serializer.save()
+        # if created:
+        #     status_code = status.HTTP_201_CREATED
+        # else:
+        #     status_code = status.HTTP_200_OK
+        return Response(UrlSerializer(url).data, status_code)
 
 
 class GetFullUrl(APIView):

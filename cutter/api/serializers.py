@@ -13,15 +13,9 @@ class UrlSerializer(serializers.ModelSerializer):
 
     def save(self):
         if self.instance is None:
-            url_obj, created = Url.objects.get_or_create(url=self.validated_data['url'])
-            if created:
-                status_code = status.HTTP_201_CREATED
-            else:
-                status_code = status.HTTP_200_OK
-            if not url_obj.short_url:
-                url_obj.short_url = generate_short_url()
-                url_obj.save()
-            return url_obj, status_code
+            encoded_url = generate_short_url()
+            url_obj = Url.objects.get_or_create(url=self.validated_data['url'], defaults={'short_url': encoded_url})
+            return url_obj
 
 
 

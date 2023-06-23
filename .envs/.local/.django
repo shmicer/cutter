@@ -1,0 +1,6 @@
+# Django
+# ------------------------------------------------------------------------------
+DJANGO_DEBUG=TRUE
+SECRET_KEY=foo
+DJANGO_SETTINGS_MODULE="config.settings.base"
+DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]

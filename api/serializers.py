@@ -7,7 +7,7 @@ class UrlSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Url
-        fields = ('url', 'short_url')
+        fields = ('url', 'short_url', 'qr')
         extra_kwargs = {'url': {'validators': []}}
 
     def save(self):
@@ -18,7 +18,9 @@ class UrlSerializer(serializers.ModelSerializer):
         if self.instance is None:
             original_url = self.validated_data['url']
             encoded_url = generate_short_url(original_url)
-            url_obj = Url.objects.get_or_create(url=original_url, defaults={'short_url': encoded_url})
+            url_obj = Url.objects.get_or_create(url=original_url,
+                                                defaults={'short_url': encoded_url}
+                                                )
             return url_obj
 
 

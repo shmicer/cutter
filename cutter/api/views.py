@@ -18,7 +18,7 @@ class GenerateShortUrl(APIView):
             status_code = status.HTTP_201_CREATED
         else:
             status_code = status.HTTP_200_OK
-        return Response(UrlSerializer(url).data, status_code)
+        return Response(url.full_url, status_code)
 
 
 class GetFullUrl(APIView):

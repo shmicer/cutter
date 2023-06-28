@@ -1,6 +1,4 @@
 from django.db import models
-from django.conf import settings
-import random
 from django.contrib.sites.models import Site
 
 '''
@@ -14,7 +12,7 @@ current_site = Site.objects.get_current()
 
 
 class Url(models.Model):
-    url = models.URLField(unique=True)
+    url = models.URLField(unique=True, max_length=400)
     short_url = models.CharField(
         max_length=20,
         unique=True,
@@ -22,11 +20,13 @@ class Url(models.Model):
         blank=True
     )
     created = models.DateTimeField(auto_now_add=True)
-    is_active = models.BooleanField(default=True)
+    qr = models.ImageField(upload_to='static/images', null=True)
+    is_active = models.BooleanField( default=True)
 
     @property
     def full_url(self):
-        return f"{current_site.domain}/{self.short_url}"
+        return f"http://127.0.0.1:50800/{self.short_url}"
+
 
 
 

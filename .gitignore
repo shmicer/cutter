@@ -77,6 +77,6 @@ cython_debug/
 
 
 
-.envs
-.idea
+.envs/
+.idea/
 bot/config.py

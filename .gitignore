@@ -74,11 +74,9 @@ dmypy.json
 .pyre/
 .pytype/
 cython_debug/
-<<<<<<< HEAD
 
-.bot/config.py
+
+
 .envs
 .idea
-
-/cutter/.envs/
-
+bot/config.py

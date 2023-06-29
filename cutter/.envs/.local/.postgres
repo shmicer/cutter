@@ -1,7 +1,0 @@
-# Postgres
-# ------------------------------------------------------------------------------
-POSTGRES_HOST=db
-POSTGRES_DB=cutter_dev
-POSTGRES_PORT=5432
-POSTGRES_USER=cutter
-POSTGRES_PASSWORD=cutter

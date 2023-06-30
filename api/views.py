@@ -1,3 +1,5 @@
+import base64
+
 from rest_framework import status
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
@@ -6,6 +8,7 @@ from django.shortcuts import redirect
 
 from .models import Url
 from .serializers import UrlSerializer
+from .services import generate_qr
 
 
 class GenerateShortUrl(APIView):
@@ -18,7 +21,13 @@ class GenerateShortUrl(APIView):
             status_code = status.HTTP_201_CREATED
         else:
             status_code = status.HTTP_200_OK
-        return Response(url.full_url, status_code)
+        short_link = url.full_url
+        qr_code = generate_qr(short_link)
+        qr_code_base64 = base64.b64encode(qr_code).decode('utf-8')
+        return Response({
+            'short_link': short_link,
+            'qr_code': qr_code_base64
+        }, status=status_code)
 
 
 class GetFullUrl(APIView):

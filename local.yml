@@ -28,16 +28,6 @@ services:
     env_file:
       - .envs/.local/.postgres
 
-  telegram-bot:
-    container_name: telegram-bot
-    working_dir: /bot
-    restart: always
-    build:
-      context: .
-      dockerfile: compose/local/django/Dockerfile
-    env_file:
-      - .envs/.local/.bot
-
 
 volumes:
   postgres_data: {}

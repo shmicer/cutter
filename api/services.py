@@ -1,9 +1,7 @@
 import hashlib
 from io import BytesIO
 
-import aiogram
 import qrcode
-from django.conf import settings
 
 
 def generate_short_url(url):
@@ -14,9 +12,10 @@ def generate_short_url(url):
 
 def generate_qr(url):
     bio = BytesIO()
-    qrcode.make(url).save(bio, 'PNG')
+    qr_code = qrcode.make(url)
+    qr_code.save(bio, format='PNG')
     bio.seek(0)
-    return aiogram.types.BufferedInputFile(bio.getvalue(), "qrcode.png")
+    return bio.getvalue()
 
 
 

@@ -1,5 +1,8 @@
+from urllib import request
+
 from django.db import models
 from django.contrib.sites.models import Site
+
 
 '''
 1. Приложение должно получать ссылку через POST запрос
@@ -8,7 +11,7 @@ from django.contrib.sites.models import Site
 4. Нужно подключить телеграм бота, при запросе к которому он также выдает короткую ссылку
 5. Можно добавить генерабор qr-кодов для перехода по ссылке при наведении камеры
 '''
-current_site = Site.objects.get_current()
+current_site = Site.objects.get_current(request)
 
 
 class Url(models.Model):
@@ -20,12 +23,11 @@ class Url(models.Model):
         blank=True
     )
     created = models.DateTimeField(auto_now_add=True)
-    qr = models.ImageField(upload_to='static/images', null=True)
-    is_active = models.BooleanField( default=True)
+    is_active = models.BooleanField(default=True)
 
     @property
     def full_url(self):
-        return f"http://127.0.0.1:50800/{self.short_url}"
+        return f"{current_site.domain}/{self.short_url}"
 
 
 

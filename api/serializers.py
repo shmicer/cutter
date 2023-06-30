@@ -7,7 +7,7 @@ class UrlSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Url
-        fields = ('url', 'short_url', 'qr')
+        fields = ('url', 'short_url')
         extra_kwargs = {'url': {'validators': []}}
 
     def save(self):

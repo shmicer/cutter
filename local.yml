@@ -28,6 +28,14 @@ services:
     env_file:
       - .envs/.local/.postgres
 
+  telegram-bot:
+    build:
+      context: .
+      dockerfile: compose/local/bot/Dockerfile
+    container_name: cutter_bot
+    volumes:
+      - ./bot:/app/bot
+
 
 volumes:
   postgres_data: {}

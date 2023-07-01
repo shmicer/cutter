@@ -6,7 +6,6 @@ import qrcode
 
 def generate_short_url(url):
     short_url = hashlib.shake_128(str(url).encode("utf-8")).hexdigest(3)
-    # short_url = ''.join(random.choices(settings.CHARACTERS, k=settings.URL_LENGTH))
     return short_url
 
 

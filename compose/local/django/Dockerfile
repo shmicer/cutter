@@ -15,6 +15,7 @@ RUN apk update \
 # install dependencies
 RUN pip install --upgrade pip
 COPY ./requirements/local/requirements.txt .
+
 RUN pip install -r requirements.txt
 
 # Run the service

@@ -10,5 +10,4 @@ djangorestframework==3.14.0
 drf-spectacular==0.26.3
 djoser==2.2.0
 qrcode==7.4.2
-
-
+aiogram==3.0.0b7

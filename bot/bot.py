@@ -1,16 +1,14 @@
 import base64
-
 import requests
 import logging
 import asyncio
 
 from aiogram import Bot, Dispatcher, types, F
 from aiogram.filters import Command
-from aiogram.types import BufferedInputFile, InputFile
+from aiogram.types import BufferedInputFile
 from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
 
-from api.services import generate_qr
 from config import API_TOKEN
 
 

@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: compose/local/django/Dockerfile
     volumes:
-      - ./:/usr/src/app
+      - ./src:/app
     ports:
       - "50800:8000"
       - "4666:4444"
@@ -34,7 +34,7 @@ services:
       dockerfile: compose/local/bot/Dockerfile
     container_name: cutter_bot
     volumes:
-      - ./bot:/app/bot
+      - ./src/bot:/app
 
 
 volumes:

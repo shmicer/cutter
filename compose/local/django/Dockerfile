@@ -1,7 +1,5 @@
 # pull official base image
 FROM python:3.11-alpine
-# set work directory
-WORKDIR /usr/src/app
 
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -14,9 +12,11 @@ RUN apk update \
 
 # install dependencies
 RUN pip install --upgrade pip
-COPY ./requirements/local/requirements.txt .
+COPY requirements /requirements
+RUN pip install -r /requirements/local.txt
 
-RUN pip install -r requirements.txt
+# set work directory
+WORKDIR /app
 
 # Run the service
 CMD python manage.py migrate \

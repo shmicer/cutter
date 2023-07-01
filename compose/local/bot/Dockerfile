@@ -3,11 +3,11 @@ FROM python:3.11-alpine
 
 # Install bot dependencies
 RUN pip install --upgrade pip
-COPY requirements/local/requirements.txt /requirements.txt
-RUN pip install -r /requirements.txt
+COPY requirements /requirements
+RUN pip install -r /requirements/local.txt
 
 # Set the working directory
-WORKDIR /app/bot
+WORKDIR /app
 
 # Run the bot script
 CMD ["python", "bot.py"]

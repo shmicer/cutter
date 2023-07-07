@@ -1,4 +1,6 @@
 import base64
+import os
+
 import requests
 import logging
 import asyncio
@@ -9,8 +11,11 @@ from aiogram.types import BufferedInputFile
 from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
 
-from config import API_TOKEN
+# from config import API_TOKEN
+from os import getenv
 
+
+API_TOKEN = getenv('API_TOKEN')
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -45,8 +50,9 @@ async def send_welcome(message: types.Message):
 async def get_url(message: types.Message):
     if is_string_an_url(message.text):
         response = requests.post(
-            "http://127.0.0.1:50800/url/", data={'url': message.text}
+            "http://web:8000/url/", data={'url': message.text}
         )
+        response.raise_for_status()
         data = response.json()
         photo = base64.b64decode(data['qr_code'])
         photo = BufferedInputFile(photo, "qrcode.png")

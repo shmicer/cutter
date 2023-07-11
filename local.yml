@@ -26,7 +26,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./docker/nginx/dev/:/etc/nginx/conf.d:ro
+      - ./docker/nginx/dev/:/etc/nginx/www.cl2u.ru.conf:ro
     links:
       - web
     depends_on:

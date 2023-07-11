@@ -11,7 +11,6 @@ from aiogram.types import BufferedInputFile
 from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
 
-# from config import API_TOKEN
 from os import getenv
 
 
@@ -50,7 +49,7 @@ async def send_welcome(message: types.Message):
 async def get_url(message: types.Message):
     if is_string_an_url(message.text):
         response = requests.post(
-            "http://web:8000/url/", data={'url': message.text}
+            "http://cl2u.ru:8000/url/", data={'url': message.text}
         )
         response.raise_for_status()
         data = response.json()

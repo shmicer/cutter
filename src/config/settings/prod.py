@@ -1,4 +1,4 @@
-import socket  # only if you haven't already imported this
+import socket
 from .base import *  # noqa
 
 DEBUG = False

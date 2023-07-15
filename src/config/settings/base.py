@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
 
 # Application definition
@@ -127,9 +127,9 @@ URL_LENGTH = 7
 
 STATIC_URL = 'static/'
 
-STATICS_DIR = BASE_DIR / "static"
+STATICS_DIR = 'app/static'
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATIC_ROOT = os.path.join(BASE_DIR / 'static')
 
 MEDIA_URL = '/images/'
 

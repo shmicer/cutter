@@ -15,6 +15,10 @@ services:
       - ./.envs/.prod/.postgres
     depends_on:
       - db
+    command: sh -c "python manage.py collectstatic --no-input && 
+                    python manage.py makemigrations &&
+                    python manage.py migrate &&
+                    gunicorn --workers=4 --reload --max-requests=1000 config.wsgi:application -b 0.0.0.0:8000"
 
   nginx:
     container_name: nginx
@@ -26,7 +30,7 @@ services:
       - "443:443"
     volumes:
       - ./nginx/prod/:/etc/nginx/conf.d:ro
-      - ./certbot/conf:/etc/letsencrypt:ro
+      - ./certbot/conf/:/etc/nginx/ssl/:ro
       - ./certbot/www:/var/www/certbot:ro
     links:
       - web

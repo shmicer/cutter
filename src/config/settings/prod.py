@@ -2,7 +2,9 @@ import socket  # only if you haven't already imported this
 from .base import *  # noqa
 
 DEBUG = False
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True
 
-hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
-# INTERNAL_IPS = [ip[: ip.rfind(".")] + ".1" for ip in ips] + ["127.0.0.1", "10.0.2.2"]
-ALLOWED_HOSTS = ['90.156.225.6', 'cl2u.ru']
+ALLOWED_HOSTS = ["cl2u.ru", "90.156.225.6"]

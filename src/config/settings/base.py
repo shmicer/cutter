@@ -23,7 +23,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
 
 
 # Application definition
@@ -69,7 +68,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
-
 SITE_ID = 1
 
 # Database
@@ -124,16 +122,13 @@ URL_LENGTH = 7
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-
-STATIC_URL = 'static/'
-
-STATICS_DIR = 'app/static'
-
-STATIC_ROOT = os.path.join(BASE_DIR / 'static')
+STATIC_URL = '/static/'
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/images/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR / 'media/images')
+MEDIA_ROOT = os.path.join(BASE_DIR / 'static/images')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

@@ -8,4 +8,3 @@ urlpatterns = [
     path('url/', GenerateShortUrl.as_view()),
     path('<str:short_url>', GetFullUrl.as_view()),
 ]
-

@@ -79,4 +79,4 @@ cython_debug/
 
 .envs/
 .idea/
-bot/config.py
+src/bot/config.py

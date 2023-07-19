@@ -1,11 +1,12 @@
 
 from django.db import models
 from django.contrib.sites.models import Site
+
 current_site = Site.objects.get_current()
 
 
 class Url(models.Model):
-    url = models.URLField(unique=True, max_length=400)
+    url = models.TextField(unique=True, max_length=2500)
     short_url = models.CharField(
         max_length=20,
         unique=True,

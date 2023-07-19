@@ -9,6 +9,7 @@ from aiogram import Bot, Dispatcher, types, F
 from aiogram.filters import Command
 from aiogram.types import BufferedInputFile
 from django.core.validators import URLValidator
+from django.forms import URLField
 from django.core.exceptions import ValidationError
 
 from os import getenv
@@ -24,13 +25,13 @@ bot = Bot(token=API_TOKEN)
 dp = Dispatcher()
 
 
-def is_string_an_url(url):
-    val = URLValidator()
-    try:
-        val(url)
-    except ValidationError:
-        return False
-    return val
+# def is_string_an_url(url):
+#     url_form_field = URLField()
+#     try:
+#         url = url_form_field.clean(url)
+#     except ValidationError:
+#         return False
+#     return True
 
 
 @dp.message(Command("start"))
@@ -47,18 +48,18 @@ async def send_welcome(message: types.Message):
 
 @dp.message(F.text)
 async def get_url(message: types.Message):
-    if is_string_an_url(message.text):
-        response = requests.post(
-            "https://cl2u.ru:8000/url", data={'url': message.text}
-        )
-        response.raise_for_status()
-        data = response.json()
-        photo = base64.b64decode(data['qr_code'])
-        photo = BufferedInputFile(photo, "qrcode.png")
-        await message.answer(data['short_link'])
-        await bot.send_photo(chat_id=message.from_user.id, photo=photo)
-    else:
-        await message.reply("Только ссылки")
+    # if is_string_an_url(message.text):
+    response = requests.post(
+        "https://cl2u.ru/url", data={'url': message.text}
+    )
+    response.raise_for_status()
+    data = response.json()
+    photo = base64.b64decode(data['qr_code'])
+    photo = BufferedInputFile(photo, "qrcode.png")
+    await message.answer(data['short_link'])
+    await bot.send_photo(chat_id=message.from_user.id, photo=photo)
+    # else:
+    #     await message.reply("Только ссылки")
 
 
 async def main():

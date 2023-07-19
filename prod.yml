@@ -22,7 +22,7 @@ services:
 
   nginx:
     container_name: nginx
-#    working_dir: /app
+    working_dir: /app
     image: nginx:stable-alpine
     restart: always
     ports:

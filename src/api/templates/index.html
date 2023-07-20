@@ -12,6 +12,10 @@
         <a href='' id="shortenedUrl" target="_blank"></a>
     </p>
 
+    <div id="qrContainer">
+
+    </div>
+
     <script>
         function shortenUrl() {
             const originalUrl = document.getElementById('originalUrl').value;
@@ -28,7 +32,16 @@
             .then(data => {
                 // Display the shortened URL to the user
                 const shortenedUrl = data.short_link;
-                console.log(shortenedUrl)
+                const base64Image = "data:image/png;base64, " + data.qr_code;
+""
+                    // Create an image element and set its source to the Base64 data URI
+                const imageElement = document.createElement("img");
+                imageElement.src = base64Image;
+
+                // Append the image element to the container
+                const imageContainer = document.getElementById("qrContainer");
+                imageContainer.innerHTML = ""; // Clear previous content
+                imageContainer.appendChild(imageElement);
                 document.getElementById('shortenedUrl').href = shortenedUrl;
                 document.getElementById('shortenedUrl').innerText = shortenedUrl.slice(8);
             })
@@ -38,6 +51,7 @@
                 document.getElementById('shortenedUrl').innerText = 'An error occurred while shortening the URL.';
             });
         }
+
     </script>
 </body>
 </html>

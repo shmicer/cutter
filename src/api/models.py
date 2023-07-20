@@ -15,6 +15,7 @@ class Url(models.Model):
     )
     created = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
+    redirect_count = models.PositiveIntegerField(default=0)
 
     @property
     def full_url(self):

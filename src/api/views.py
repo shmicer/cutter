@@ -35,8 +35,9 @@ class GetFullUrl(APIView):
     def get(self, request, short_url):
         url_object = get_object_or_404(Url, short_url=short_url)
         full_link = url_object.url if url_object.url.startswith(('http://', 'https://')) else f'https://{url_object.url}'
+        url_object.redirect_count += 1
+        url_object.save()
         return redirect(full_link)
-
 
 
 

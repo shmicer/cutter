@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>URL Shortener</title>
+</head>
+<body>
+    <h1>URL Shortener</h1>
+    <p>Enter the URL you want to shorten:</p>
+    <input type="text" id="originalUrl" placeholder="Enter URL here">
+    <button onclick="shortenUrl()">Shorten</button>
+    <p>
+        <a href='' id="shortenedUrl" target="_blank"></a>
+    </p>
+
+    <script>
+        function shortenUrl() {
+            const originalUrl = document.getElementById('originalUrl').value;
+
+            // Make a POST request to your URL shortener API
+            fetch('https://cl2u.ru/url', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ url: originalUrl }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Display the shortened URL to the user
+                const shortenedUrl = data.short_link;
+                console.log(shortenedUrl)
+                document.getElementById('shortenedUrl').href = shortenedUrl;
+                document.getElementById('shortenedUrl').innerText = shortenedUrl.slice(8);
+            })
+            .catch(error => {
+                // Handle errors if the API call fails
+                console.error('Error:', error);
+                document.getElementById('shortenedUrl').innerText = 'An error occurred while shortening the URL.';
+            });
+        }
+    </script>
+</body>
+</html>
+

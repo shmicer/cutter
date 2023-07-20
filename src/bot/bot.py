@@ -56,7 +56,7 @@ async def get_url(message: types.Message):
     data = response.json()
     photo = base64.b64decode(data['qr_code'])
     photo = BufferedInputFile(photo, "qrcode.png")
-    await message.answer(data['short_link'])
+    await message.answer(data['short_link'][8:])
     await bot.send_photo(chat_id=message.from_user.id, photo=photo)
     # else:
     #     await message.reply("Только ссылки")

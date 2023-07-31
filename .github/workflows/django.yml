@@ -33,3 +33,4 @@ jobs:
             docker compose -f prod.yml down up -d;
             docker system prune --all --force;
 
+

@@ -1,30 +1,37 @@
-name: Django CI
+name: CI/CD Deployment
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches:
+      - main  # Change this to your main branch name
 
 jobs:
-  build:
-
+  deploy:
     runs-on: ubuntu-latest
-    strategy:
-      max-parallel: 4
-      matrix:
-        python-version: [3.7, 3.8, 3.9]
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install Dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r /requirements/prod.txt
-    - name: Run Tests
-      run: |
-        python manage.py test
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.11  # Change this to your desired Python version
+
+      - name: Install dependencies
+        run: pip install -r /requirements/prod.txt
+
+      # Add your test steps here if needed
+
+      - name: Deploy to server
+        env:
+          SERVER_SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}  # Add your secret name for the server SSH key
+          SERVER_USER: root
+          SERVER_HOST: 90.156.225.6
+          PROJECT_DIR: /home/cutter
+        run: |
+          echo "$SERVER_SSH_KEY" > /tmp/server_key
+          chmod 600 /tmp/server_key
+          scp -i /tmp/server_key -r . $SERVER_USER@$SERVER_HOST:$PROJECT_DIR
+          ssh -i /tmp/server_key $SERVER_USER@$SERVER_HOST 'bash -s' < deploy.sh
+

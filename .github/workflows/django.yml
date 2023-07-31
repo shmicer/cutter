@@ -30,7 +30,7 @@ jobs:
             git checkout main;
             git pull;
             docker compose -f prod.yml down;
-            docker compose -f prod.yml down up -d;
+            docker compose -f prod.yml up -d;
             docker system prune --all --force;
 
 

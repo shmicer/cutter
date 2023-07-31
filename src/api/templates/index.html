@@ -1,26 +1,92 @@
 <!DOCTYPE html>
-<html>
+<html lang='en'>
 <head>
     <title>URL Shortener</title>
+<!--    <link rel="stylesheet" type="text/css" href="static/css/project.css">-->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            margin-top: 30px;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 80%;
+            max-width: 500px;
+
+        }
+
+        button {
+            padding: 12px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #shortenedUrl {
+            text-decoration: none;
+            color: #007BFF;
+        }
+
+        #qrContainer {
+            margin-top: 20px;
+        }
+
+        img {
+            max-width: 200px;
+            height: auto;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+        @media (max-width: 350px) {
+            input[type="text"] {
+                width: 90%;
+            }
+
+            button {
+                width: 75%;
+            }
+
+            img {
+                max-width: 80%;
+            }
+        }
+    </style>
 </head>
 <body>
     <h1>URL Shortener</h1>
     <p>Enter the URL you want to shorten:</p>
-    <input type="text" id="originalUrl" placeholder="Enter URL here">
-    <button onclick="shortenUrl()">Shorten</button>
+    <input type='text' id='originalUrl' placeholder='Enter URL here'>
+    <button type='button' onclick='shortenUrl()'>Shorten</button>
     <p>
-        <a href='' id="shortenedUrl" target="_blank"></a>
+        <a href='' id='shortenedUrl' target='_blank'></a>
     </p>
 
-    <div id="qrContainer">
+    <div id='qrContainer'>
 
     </div>
-
     <script>
         function shortenUrl() {
             const originalUrl = document.getElementById('originalUrl').value;
-
-            // Make a POST request to your URL shortener API
             fetch('https://cl2u.ru/url', {
                 method: 'POST',
                 headers: {
@@ -32,26 +98,20 @@
             .then(data => {
                 // Display the shortened URL to the user
                 const shortenedUrl = data.short_link;
-                const base64Image = "data:image/png;base64, " + data.qr_code;
-""
-                    // Create an image element and set its source to the Base64 data URI
-                const imageElement = document.createElement("img");
+                const base64Image = 'data:image/png;base64, ' + data.qr_code;
+                const imageElement = document.createElement('img');
                 imageElement.src = base64Image;
-
-                // Append the image element to the container
-                const imageContainer = document.getElementById("qrContainer");
+                const imageContainer = document.getElementById('qrContainer');
                 imageContainer.innerHTML = ""; // Clear previous content
                 imageContainer.appendChild(imageElement);
                 document.getElementById('shortenedUrl').href = shortenedUrl;
                 document.getElementById('shortenedUrl').innerText = shortenedUrl.slice(8);
             })
             .catch(error => {
-                // Handle errors if the API call fails
                 console.error('Error:', error);
                 document.getElementById('shortenedUrl').innerText = 'An error occurred while shortening the URL.';
             });
         }
-
     </script>
 </body>
 </html>

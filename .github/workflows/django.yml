@@ -2,8 +2,9 @@ name: CI/CD Deployment
 
 on:
   push:
-    branches:
-      - main  # Change this to your main branch name
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
 
 jobs:
   deploy:
@@ -24,7 +25,6 @@ jobs:
           host: ${{secrets.SSH_HOST}}
           user: ${{secrets.SSH_USER}}
           private_key: ${{secrets.SSH_PRIVATE_KEY}}
-          host_fingerprint: ${{secrets.HOST_FINGERPRINT}}
           command: |
             cd ..; 
             cd ${{ secrets.PROJECT_FOLDER }};

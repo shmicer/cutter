@@ -17,6 +17,7 @@ jobs:
       - run: flake8 .
 
   deploy:
+    needs: lint
     runs-on: ubuntu-latest
 
     steps:

@@ -1,5 +1,4 @@
 import base64
-import os
 
 import requests
 import logging
@@ -8,9 +7,6 @@ import asyncio
 from aiogram import Bot, Dispatcher, types, F
 from aiogram.filters import Command
 from aiogram.types import BufferedInputFile
-from django.core.validators import URLValidator
-from django.forms import URLField
-from django.core.exceptions import ValidationError
 
 from os import getenv
 
@@ -43,7 +39,9 @@ async def send_welcome(message: types.Message):
         chat_id=message.from_user.id,
         photo='some_file.png'
     )
-    await message.reply("Привет, я умею сокращать ссылки. Отправь мне ссылку и увидишь")
+    await message.reply(
+        "Привет, я умею сокращать ссылки. Отправь мне ссылку и увидишь"
+    )
 
 
 @dp.message(F.text)

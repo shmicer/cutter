@@ -43,13 +43,3 @@ class GetFullUrl(APIView):
         url_object.redirect_count += 1
         url_object.save()
         return redirect(full_link)
-
-
-
-
-
-
-
-
-
-

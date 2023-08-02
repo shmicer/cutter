@@ -20,9 +20,3 @@ class Url(models.Model):
     @property
     def full_url(self):
         return f"{current_site}/{self.short_url}"
-
-
-
-
-
-

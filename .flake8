@@ -1,9 +1,14 @@
 [flake8]
-extend-ignore = E203
+ignore = D203,E741
 exclude =
-    .git,
-    __pycache__,
-    ./src/config/settings/,
-    ./src/api/migrations/,
-    ./venv/,
+    migrations
+    __pycache__
+    manage.py
+    base.py
+    local.py
+    env
+    .venv
+    ./venv
+    venv/
+    .venv/
 max-complexity = 10

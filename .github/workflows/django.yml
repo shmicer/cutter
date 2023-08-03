@@ -1,10 +1,6 @@
 name: CI/CD Deployment
 
-on:
-  push:
-    branches: ["main"]
-  pull_request:
-    branches: ["main"]
+on: [pull_request, push]
 
 jobs:
   lint:
@@ -37,7 +33,7 @@ jobs:
           command: |
             cd ..; 
             cd ${{ secrets.PROJECT_FOLDER }};
-            git checkout;
+            git checkout main;
             git pull;
             docker compose -f prod.yml down;
             docker compose -f prod.yml up -d;

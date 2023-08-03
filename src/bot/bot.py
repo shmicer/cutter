@@ -1,10 +1,12 @@
+import asyncio
 import base64
 
 import requests
 import logging
-import asyncio
+from os import getenv
 
-from aiogram import Bot, Dispatcher, types, F
+import requests
+from aiogram import Bot, Dispatcher, F, types
 from aiogram.filters import Command
 from aiogram.types import BufferedInputFile
 
@@ -21,15 +23,6 @@ bot = Bot(token=API_TOKEN)
 dp = Dispatcher()
 
 
-# def is_string_an_url(url):
-#     url_form_field = URLField()
-#     try:
-#         url = url_form_field.clean(url)
-#     except ValidationError:
-#         return False
-#     return True
-
-
 @dp.message(Command("start"))
 async def send_welcome(message: types.Message):
     """
@@ -39,9 +32,9 @@ async def send_welcome(message: types.Message):
         chat_id=message.from_user.id,
         photo='some_file.png'
     )
-    await message.reply(
-        "Привет, я умею сокращать ссылки. Отправь мне ссылку и увидишь"
-    )
+    await message.reply("Привет, я умею сокращать ссылки."
+                        " Отправь мне ссылку и увидишь")
+
 
 
 @dp.message(F.text)

@@ -15,11 +15,3 @@ def generate_qr(url):
     qr_code.save(bio, format='PNG')
     bio.seek(0)
     return bio.getvalue()
-
-
-
-
-
-
-
-

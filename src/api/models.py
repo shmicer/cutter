@@ -1,6 +1,6 @@
 
-from django.db import models
 from django.contrib.sites.models import Site
+from django.db import models
 
 current_site = Site.objects.get_current()
 
@@ -20,9 +20,3 @@ class Url(models.Model):
     @property
     def full_url(self):
         return f"{current_site}/{self.short_url}"
-
-
-
-
-
-

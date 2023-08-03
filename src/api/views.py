@@ -1,10 +1,10 @@
 import base64
 
+from django.shortcuts import redirect
 from rest_framework import status
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from django.shortcuts import redirect
 
 from .models import Url
 from .serializers import UrlSerializer
@@ -43,13 +43,3 @@ class GetFullUrl(APIView):
         url_object.redirect_count += 1
         url_object.save()
         return redirect(full_link)
-
-
-
-
-
-
-
-
-
-

@@ -1,9 +1,7 @@
 import asyncio
 import base64
 
-import requests
 import logging
-from os import getenv
 
 import requests
 from aiogram import Bot, Dispatcher, F, types
@@ -34,7 +32,6 @@ async def send_welcome(message: types.Message):
     )
     await message.reply("Привет, я умею сокращать ссылки."
                         " Отправь мне ссылку и увидишь")
-
 
 
 @dp.message(F.text)

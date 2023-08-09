@@ -25,7 +25,11 @@ class GenerateShortUrl(APIView):
         qr_code = generate_qr(short_link)
         qr_code_base64 = base64.b64encode(qr_code).decode('utf-8')
         return Response({
-            'url': url,
+            'url': url.url,
+            'short_url': url.short_url,
+            'created': url.created,
+            'is_active': url.is_active,
+            'redirect_count': url.redirect_count,
             'short_link': short_link,
             'qr_code': qr_code_base64
         }, status=status_code)

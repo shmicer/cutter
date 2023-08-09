@@ -35,8 +35,6 @@ jobs:
           command: |
             cd ..; 
             cd ${{ secrets.PROJECT_FOLDER }};
-            git stash;
-            git stash drop;
             git pull;
             docker compose -f prod.yml down;
             docker compose -f prod.yml build;

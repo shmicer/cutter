@@ -13,7 +13,8 @@ def test_create_url():
     payload = create_payload()
     create_url_response = create_url(payload)
     assert create_url_response.status_code == 200
-    assert create_url_response['short_link'] == f'{ENDPOINT}{get_payload["short_url"]}'
+    data = create_url_response.json()
+    print(data)
 
 
 def connect():

@@ -13,21 +13,7 @@ def test_create_url():
     payload = create_payload()
     create_url_response = create_url(payload)
     assert create_url_response.status_code == 200
-
-    data = create_url_response.json()
-    print(data)
-    # task_id = data['id']['task_id']
-    # get_task_response = get_task(task_id)
-    # assert get_task_response.status_code == 200
-    # get_task_data = get_task_response.json()
-    # assert get_task_data['content'] == payload['content']
-    # assert get_task_data['user_id'] == payload['user_id']
-
-
-# def test_get_url():
-#     payload = new_payload()
-#     create_url_response = create_url(payload)
-#     assert create_url_response.status_code == 201
+    assert create_url_response['short_link'] == f'{ENDPOINT}{get_payload["short_url"]}'
 
 
 def connect():

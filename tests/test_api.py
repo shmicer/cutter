@@ -17,6 +17,17 @@ def test_create_url():
     print(data)
 
 
+def test_redirect_count():
+    payload = create_payload()
+    create_url_response = create_url(payload)
+    assert create_url_response.status_code == 200
+    data = create_url_response.json()
+    response = requests.get(data['short_link'])
+    assert response.status_code == 200
+    print(data)
+    assert data['redirect_count'] == 1
+
+
 def connect():
     return requests.get(ENDPOINT)
 
@@ -30,7 +41,7 @@ def get_url(short_url):
 
 
 def create_payload():
-    url = 'https://www.honeybadger.io/blog/django-test-github-actions/'
+    url = 'https://www.honeybadger.io/blog/django-test-github-actions/1'
     return {
         'url': url,
     }

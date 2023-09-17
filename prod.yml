@@ -6,6 +6,7 @@ services:
     build:
       context: .
       dockerfile: compose/prod/django/Dockerfile
+
     volumes:
       - ./src:/app
     ports:
@@ -66,7 +67,6 @@ services:
 #    command: certonly --webroot --webroot-path=/var/www/certbot/ --email shmicer@gmail.com --agree-tos --no-eff-email -d cl2u.ru -d www.cl2u.ru
     depends_on:
       - nginx
-
 
 volumes:
   postgres_data: {}

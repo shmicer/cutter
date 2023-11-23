@@ -28,7 +28,6 @@ def test_redirect_count():
     response = requests.get(data['short_link'])
 
 
-
 def connect():
     return requests.get(ENDPOINT)
 

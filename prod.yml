@@ -17,7 +17,6 @@ services:
     depends_on:
       - db
     command: sh -c "python manage.py collectstatic --no-input && 
-                    python manage.py makemigrations &&
                     python manage.py migrate &&
                     gunicorn --workers=4 --reload --max-requests=1000 config.wsgi:application -b 0.0.0.0:8000"
 

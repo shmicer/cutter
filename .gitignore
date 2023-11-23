@@ -80,3 +80,5 @@ cython_debug/
 .envs/
 .idea/
 ./src/bot/config.py
+
+.DS_Store

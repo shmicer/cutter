@@ -4,7 +4,7 @@ FROM python:3.11-alpine
 # Install bot dependencies
 RUN pip install --upgrade pip
 COPY requirements /requirements
-RUN pip install -r /requirements/prod.txt
+RUN pip install -r /requirements/bot.txt
 
 # Set the working directory
 WORKDIR /app

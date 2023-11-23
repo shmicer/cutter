@@ -26,20 +26,13 @@ async def send_welcome(message: types.Message):
     """
     This handler will be called when user sends `/start` or `/help` command
     """
-    await bot.send_photo(
-        chat_id=message.from_user.id,
-        photo='some_file.png'
-    )
-    await message.reply("Привет, я умею сокращать ссылки."
-                        " Отправь мне ссылку и увидишь")
+    await bot.send_photo(chat_id=message.from_user.id, photo='some_file.png')
+    await message.reply("Привет, я умею сокращать ссылки.Отправь мне ссылку и увидишь")
 
 
 @dp.message(F.text)
 async def get_url(message: types.Message):
-    # if is_string_an_url(message.text):
-    response = requests.post(
-        "https://cl2u.ru/url", data={'url': message.text}
-    )
+    response = requests.post("https://cl2u.ru/url", data={'url': message.text})
     response.raise_for_status()
     data = response.json()
     photo = base64.b64decode(data['qr_code'])
@@ -47,8 +40,6 @@ async def get_url(message: types.Message):
     await message.answer(f'Ссылка: \n {data["short_link"][8:]}')
     await message.answer('QR-code:')
     await bot.send_photo(chat_id=message.from_user.id, photo=photo)
-    # else:
-    #     await message.reply("Только ссылки")
 
 
 async def main():
